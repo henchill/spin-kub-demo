@@ -2,7 +2,7 @@ node {
     def tagName
     stage('Clone repository') {
         checkout scm
-        tagName='spinnaker-test-docker.martifactory.io/spin-kub-demo:v0.0.'+env.BUILD_NUMBER
+        tagName='spinnaker-test-docker.martifactory.io/demos/spin-kub-demo:v0.0.'+env.BUILD_NUMBER
     }
 
     stage('Build Image') {
