@@ -2,7 +2,7 @@ node {
     def tagName
     stage('Clone repository') {
         checkout scm
-        tagName='spinnaker-test-docker.martifactory.io/spin-kub-demo:'+env.BUILD_NUMBER
+        tagName='spinnaker-test-docker.martifactory.io/spin-kub-demo:v0.0.'+env.BUILD_NUMBER
     }
 
     stage('Build Image') {
@@ -10,9 +10,11 @@ node {
     }
 
     stage('Publish Image') {
-        def server = Artifactory.server('MArtifactory')
-        def rtDocker = Artifactory.docker credentialsId: 'artifactory-creds'
+        sh "docker push "+tagName
+
+        // def server = Artifactory.server('MArtifactory')
+        // def rtDocker = Artifactory.docker credentialsId: 'artifactory-creds'
 	
-        rtDocker.push(tagName, 'spinnaker-test-docker')
+        // rtDocker.push(tagName, 'spinnaker-test-docker')
     }
 }
